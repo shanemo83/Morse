@@ -1,0 +1,53 @@
+#Shane Morse
+#12/14/17
+#Pascal's Triangle
+#Print rows of Pascal's Triangle using combination in a list comprehension
+
+
+import math
+
+#Specific element of Pascal's Triangle
+def printElement():
+  Header="PRINT A SPECIFIC ELEMENT of\nPASCAL'S TRIANGLE"
+ 
+  print('\n'.join('{:^30}'.format(s) for s in Header.split('\n')))
+
+  print("\nFirst enter a row number followed by a cell number to find that value in Pascal's triangle.")
+  row=int(input("\nEnter a row: "))
+  while row < 1:
+    row=int(input("\nRETRY: Enter a row as an integer greater than 0: "))
+  cell=int(input("Enter a cell: "))
+  while cell > row:
+    cell=int(input("\nRETRY: Enter a cell number less than the row number: "))
+  #formula is for 
+  value = int(math.factorial(row-1)/(math.factorial(cell-1)*math.factorial((row-1)-(cell-1))))
+  print("\nRow",row,"and cell",cell,"is: ",value)
+
+
+
+#Print Rows of Pascal's Triangle
+def printRows():
+  Header="\n\nPRINT ROWS of PASCAL'S TRIANGLE"
+  print('\n'.join('{:^40}'.format(s) for s in Header.split('\n')))
+  
+  rows=int(input("\nEnter the number of rows: "))
+  while rows < 1:
+    rows=int(input("\nRETRY: Enter a row as an integer greater than 0: "))
+  print("\n"+str(rows),"rows of Pascal's triangle: ")
+  for n in range(0,rows):
+    s=[math.factorial(n)/(math.factorial(r)*math.factorial(n-r)) for r in range(0,n+1)]
+    for i in range(0,len(s)):
+      print("{:5.0f}".format(int(s[i]))," ",end="")
+      #print("{:^5}".format(int(s[i]))," ",end="")
+    print("")
+
+print("1: Find a specific element of Pascal's Triangle. ")
+print("2: Print rows of Pascal's Triangle. ")
+option=int(input("Enter choice: "))
+
+if option == 1:
+  printElement()
+elif option==2:
+  printRows()
+else:
+  print("Invalid option choice.")
